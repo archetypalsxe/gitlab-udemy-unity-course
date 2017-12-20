@@ -7,13 +7,15 @@ public class LevelManager : MonoBehaviour {
 
 	// Load up the requested level
 	public void LoadLevel(string name) {
-		Debug.Log("Level load requested: "+ name);
 		SceneManager.LoadScene(name);
+	}
+
+	public void LoadNextLevel() {
+		SceneManager.LoadScene(SceneManager.GetSceneAt(0).buildIndex + 1);
 	}
 
 	// Quit the game
 	public void ExitGame() {
-		Debug.Log("Requested has been recevied to exit the game");
 		Application.Quit();
 	}
 }
