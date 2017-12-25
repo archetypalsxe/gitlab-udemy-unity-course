@@ -20,11 +20,8 @@ public class Brick : MonoBehaviour {
 
 	public void OnCollisionEnter2D (Collision2D trigger) {
 		this.timesHit++;
-		SimulateWin();
-	}
-
-	// TODO Remove this method and replace with actual method
-	public void SimulateWin() {
-		this.levelManager.LoadNextLevel();
+		if(this.timesHit >= this.maxHits) {
+			Destroy(gameObject);
+		}
 	}
 }
