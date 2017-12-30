@@ -18,4 +18,10 @@ public class LevelManager : MonoBehaviour {
 	public void ExitGame() {
 		Application.Quit();
 	}
+
+	public void BrickDestroyed() {
+		if(Brick.brickCount <= 0) {
+			this.LoadNextLevel();
+		}
+	}
 }

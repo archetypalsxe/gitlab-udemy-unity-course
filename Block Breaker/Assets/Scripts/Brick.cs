@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class Brick : MonoBehaviour {
 
-	public int maxHits = 1;
+	public Sprite[] sprites;
+	public static int brickCount;
 
 	protected int timesHit = 0;
 	protected LevelManager levelManager;
+	private bool isBreakable;
 
 	// Use this for initialization
 	void Start () {
+		this.isBreakable = this.tag == "Breakable";
+		if(this.isBreakable) {
+			brickCount++;
+		}
 		this.levelManager = GameObject.FindObjectOfType<LevelManager>();
 	}
 
@@ -19,9 +25,25 @@ public class Brick : MonoBehaviour {
 	}
 
 	public void OnCollisionEnter2D (Collision2D trigger) {
+		if(this.isBreakable) {
+			this.HandleHits();
+		}
+	}
+
+	protected void HandleHits() {
 		this.timesHit++;
-		if(this.timesHit >= this.maxHits) {
+		if(this.timesHit >= (this.sprites.Length + 1)) {
+			brickCount--;
+			this.levelManager.BrickDestroyed();
 			Destroy(gameObject);
+		} else {
+			LoadNewSprite();
+		}
+	}
+
+	protected void LoadNewSprite() {
+		if(this.sprites[timesHit - 1]) {
+			this.GetComponent<SpriteRenderer>().sprite = this.sprites[timesHit - 1];
 		}
 	}
 }
