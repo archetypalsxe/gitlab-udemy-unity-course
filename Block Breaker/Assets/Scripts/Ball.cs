@@ -16,6 +16,18 @@ public class Ball : MonoBehaviour {
 			this.transform.position - this.paddle.transform.position;
 	}
 
+	public void OnCollisionEnter2D (Collision2D collision) {
+		if(hasStarted) {
+			// Randomly changing velocity slightly on collision
+			Vector2 tweak = new Vector2(Random.Range(-0.2f, 0.2f), Random.Range(-0.2f, 0.2f));
+			this.GetComponent<Rigidbody2D>().velocity += tweak;
+
+			if(collision.gameObject.tag != "Breakable") {
+				this.GetComponent<AudioSource>().Play();
+			}
+		}
+	}
+
 	// Update is called once per frame
 	void Update () {
 		if(!this.hasStarted) {
