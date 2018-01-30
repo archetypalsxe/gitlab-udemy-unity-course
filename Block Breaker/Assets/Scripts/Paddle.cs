@@ -33,8 +33,8 @@ public class Paddle : MonoBehaviour {
 		Vector3 paddlePosition = new Vector3 (
 			Mathf.Clamp(
 				xPosition,
-				0.5f,
-				15.5f
+				0.88f,
+				15.16f
 			),
 			this.transform.position.y,
 			this.transform.position.x
