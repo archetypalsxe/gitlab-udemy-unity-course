@@ -81,6 +81,7 @@ MonoBehaviour:
   crack: {fileID: 8300000, guid: 9c13873043021469fb7045bd7bc6d8fe, type: 3}
   sprites:
   - {fileID: 21300008, guid: 566fb0436499841bcaeb5e079cb6bccb, type: 3}
+  smoke: {fileID: 1672568455812832, guid: f6e24d423e3844390b9001da494bf5ba, type: 2}
 --- !u!212 &212943506298423162
 SpriteRenderer:
   m_ObjectHideFlags: 1
