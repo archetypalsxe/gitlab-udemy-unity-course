@@ -5,10 +5,22 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
 	public float movementSpeed = 8f;
+	public float boundaryPadding = 0.6f;
+
+	protected float xMinimum;
+	protected float xMaximum;
+	protected float yMinimum;
+	protected float yMaximum;
 
 	// Use this for initialization
 	void Start () {
-
+		float cameraDistance = transform.position.z - Camera.main.transform.position.z;
+		Vector3 minBoundary = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, cameraDistance));
+		Vector3 maxBoundary = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, cameraDistance));
+		this.xMinimum = minBoundary.x + this.boundaryPadding;
+		this.xMaximum = maxBoundary.x - this.boundaryPadding;
+		this.yMinimum = minBoundary.y + this.boundaryPadding;
+		this.yMaximum = maxBoundary.y - this.boundaryPadding;
 	}
 
 	// Update is called once per frame
@@ -28,37 +40,39 @@ public class PlayerController : MonoBehaviour {
 		if(Input.GetKey(KeyCode.RightArrow)) {
 			this.moveRight();
 		}
+
+		this.checkBoundaries();
+	}
+
+	protected void checkBoundaries() {
+		this.transform.position = new Vector3 (
+			Mathf.Clamp(
+				this.transform.position.x,
+				this.xMinimum,
+				this.xMaximum
+			),
+			Mathf.Clamp(
+				this.transform.position.y,
+				this.yMinimum,
+				this.yMaximum
+			),
+			this.transform.position.z
+		);
 	}
 
 	protected void moveUp() {
-		this.movePlayer(0, 1);
+		this.transform.position += Vector3.up * this.movementSpeed * Time.deltaTime;
 	}
 
 	protected void moveDown() {
-		this.movePlayer(0, -1);
+		this.transform.position += Vector3.down * this.movementSpeed * Time.deltaTime;
 	}
 
 	protected void moveLeft() {
-		this.movePlayer(-1, 0);
+		this.transform.position += Vector3.left * this.movementSpeed * Time.deltaTime;
 	}
 
 	protected void moveRight() {
-		this.movePlayer(1, 0);
-	}
-
-	protected void movePlayer(float xDifferential, float yDifferential) {
-		this.transform.position = new Vector3 (
-			Mathf.Clamp(
-				this.transform.position.x + (xDifferential * this.movementSpeed * Time.deltaTime) ,
-				-5.5f,
-				5.5f
-			),
-			Mathf.Clamp(
-				this.transform.position.y + (yDifferential * this.movementSpeed * Time.deltaTime),
-				-4.5f,
-				4.5f
-			),
-			this.transform.position.x
-		);
+		this.transform.position += Vector3.right * this.movementSpeed * Time.deltaTime;
 	}
 }
