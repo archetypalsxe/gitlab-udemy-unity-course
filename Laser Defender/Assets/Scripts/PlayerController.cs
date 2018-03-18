@@ -6,7 +6,10 @@ public class PlayerController : MonoBehaviour {
 
 	public float movementSpeed = 8f;
 	public float boundaryPadding = 0.6f;
+	public GameObject laserPrefab;
+	public float fireRate = 0.2f;
 
+	protected float laserDistance = 0.6f;
 	protected float xMinimum;
 	protected float xMaximum;
 	protected float yMinimum;
@@ -42,6 +45,22 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		this.checkBoundaries();
+
+		if(Input.GetKeyDown(KeyCode.Space)) {
+			InvokeRepeating("generateLaser", 0f, fireRate);
+		}
+
+		if(Input.GetKeyUp(KeyCode.Space)) {
+			CancelInvoke("generateLaser");
+		}
+	}
+
+	protected void generateLaser() {
+		Instantiate(
+			this.laserPrefab,
+			this.transform.position + Vector3.up * this.laserDistance,
+			Quaternion.identity
+		);
 	}
 
 	protected void checkBoundaries() {
