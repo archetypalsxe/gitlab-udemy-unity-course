@@ -8,12 +8,24 @@ public class PlayerController : MonoBehaviour {
 	public float boundaryPadding = 0.6f;
 	public GameObject laserPrefab;
 	public float fireRate = 0.2f;
+	public float health = 100f;
 
 	protected float laserDistance = 0.6f;
 	protected float xMinimum;
 	protected float xMaximum;
 	protected float yMinimum;
 	protected float yMaximum;
+
+	public void OnTriggerEnter2D (Collider2D collision) {
+		EnemyLaser laser = collision.gameObject.GetComponent<EnemyLaser>();
+		if(laser != null) {
+			this.health -= laser.GetDamage();
+			laser.Hit();
+			if (health <= 0) {
+				Destroy(this.gameObject);
+			}
+		}
+	}
 
 	// Use this for initialization
 	void Start () {
