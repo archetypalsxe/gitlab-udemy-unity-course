@@ -8,8 +8,8 @@ public class Enemy : MonoBehaviour {
 	public GameObject laserPrefab;
 
 	public float minFireRate = 2f;
-	public float maxFireRate = 1f;
-	public float startingDelay = 3f;
+	public float maxFireRate = 0.5f;
+	public float startingDelay = 0f;
 
 	protected float laserDistance = 0.6f;
 	protected float timeToFire;
@@ -27,7 +27,9 @@ public class Enemy : MonoBehaviour {
 
 	void Start() {
 		this.generateRandomFireTime();
+		Debug.Log("Initial: " + this.timeToFire);
 		this.timeToFire += this.startingDelay;
+		Debug.Log("After: " + this.timeToFire);
 	}
 
 	void Update() {

@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114984513252303500}
   - component: {fileID: 50417114882971864}
   - component: {fileID: 61972837840990602}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,8 +103,8 @@ MonoBehaviour:
   laserPrefab: {fileID: 1091638601558776, guid: 29763fe202e2b4839a60a2a92dbcfbb5,
     type: 2}
   minFireRate: 2
-  maxFireRate: 1
-  startingDelay: 2
+  maxFireRate: 0.5
+  startingDelay: 0
 --- !u!212 &212870239814605582
 SpriteRenderer:
   m_ObjectHideFlags: 1
