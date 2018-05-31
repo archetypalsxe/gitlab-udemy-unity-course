@@ -50,8 +50,10 @@ public class EnemySpawner : MonoBehaviour {
 	}
 
 	protected void generateEnemiesUntilFull() {
+		Debug.Log("Generating enemy fuction");
 		Transform freePosition = this.NextFreePosition();
 		if(freePosition) {
+			Debug.Log("Spawning enemy: " + freePosition);
 			GameObject enemy = Instantiate(
 				enemyPrefab,
 				freePosition.transform.position,
@@ -59,6 +61,9 @@ public class EnemySpawner : MonoBehaviour {
 			) as GameObject;
 			enemy.transform.parent = freePosition;
 			Invoke("generateEnemiesUntilFull", this.spawnDelay);
+			Debug.Log("Invoked!");
+		} else {
+			Debug.Log("No free positions");
 		}
 	}
 

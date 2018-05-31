@@ -27,9 +27,7 @@ public class Enemy : MonoBehaviour {
 
 	void Start() {
 		this.generateRandomFireTime();
-		Debug.Log("Initial: " + this.timeToFire);
 		this.timeToFire += this.startingDelay;
-		Debug.Log("After: " + this.timeToFire);
 	}
 
 	void Update() {
